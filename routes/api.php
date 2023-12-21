@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,5 +18,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::post('/update', [UserController::class, 'update']);
+
 });
+
+                  /* User authentication Route */
+Route::controller(UserController::class)->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::post('register', 'register');
+        Route::post('login', 'login');
+        Route::post('/resetPassword', 'resetPassword');
+        Route::prefix('socialite')->group(function () {
+            Route::get('{provider}/login', 'socialiteLogin');
+            Route::get('{provider}/redirect', 'socialiteRedirect');
+        });
+    });
+    Route::post('/update', 'update')->middleware('auth:sanctum');
+});
+                   /* End User Route */
+
+
+
+
+
+

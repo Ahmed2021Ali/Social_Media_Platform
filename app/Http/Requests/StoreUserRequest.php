@@ -15,11 +15,6 @@ class StoreUserRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -29,7 +24,7 @@ class StoreUserRequest extends FormRequest
             'password' => ['required', 'confirmed'],
             'bio'=>['nullable','string'],
             'birth'=>['required','date'],
-            'file' => ['nullable', 'max:1000', 'mimes:png,jpg,jpeg,webp'],
+            'file' => ['nullable', 'max:2000', 'mimes:png,jpg,jpeg,webp'],
             'provider'=>['nullable','string'],
             'provider_id' => ['nullable','numeric'],
         ];

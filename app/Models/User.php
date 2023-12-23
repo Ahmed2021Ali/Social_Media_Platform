@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable ,InteractsWithMedia;
 
 
     protected $fillable = [
@@ -33,6 +38,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaCollection('usersImages');
+    }
 
     public function chats()
     {
@@ -52,7 +61,7 @@ class User extends Authenticatable
     }
     public function requests()
     {
-        return $this->hasMany(FriendRequest::class);
+        return $this->hasMany(FriendRequest::class,'receiver_id');
     }
 
 }

@@ -2,141 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Http\Request;
-use App\Http\Requests\LoginUserRequest;
-use App\Http\Requests\ResetPasswordRequest;
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\SearchUserRequest;
+use App\Http\Resources\FriendsResource;
+use App\Http\Resources\SearchResource;
+use App\Http\Resources\UserhResource;
+use App\Models\FriendRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
-use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
-    public function register(StoreUserRequest $request)
-    {
-        $dataValidated = $request->validated();
-        if ($dataValidated['file']) {
-            $dataValidated['file'] = uploadFile($dataValidated['file'], 'usersImage');
-        }
-        $user = User::create($dataValidated);
-        return response()->json([
-            'status' => true,
-            'message' => 'User Created Successfully',
-            'token' => $user->createToken("API TOKEN")->plainTextToken,
-            'user' => $user,
-        ], 200);
-    }
 
-    public function login(LoginUserRequest $request)
+    public function show($id)
     {
-        if (!Auth::attempt($request->only(['email', 'password']))) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Email & Password does not match with our record.',
-            ], 401);
-        } else {
-            $user = User::where('email', $request->email)->first();
-            return response()->json([
-                'status' => true,
-                'message' => 'User Login  Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken,
-                'user' => $user,
-            ], 200);
-        }
-    }
-
-    public function update(UpdateUserRequest $request)
-    {
-        $user = $request->user();
+        $user = User::find($id);
         if ($user) {
-            $dataValidated = $request->validated();
-            if ($dataValidated['file']) {
-                deleteFile($user->file, 'usersImage');
-                $dataValidated['file'] = uploadFile($dataValidated['file'], 'usersImage');
-            }
-            $user->update($dataValidated);
-            return response()->json([
-                'status' => true,
-                'message' => 'User Update Successfully',
-                'user' => $user,
-            ], 200);
+            return new UserhResource($user);
         } else {
             return response()->json([
                 'status' => false,
-                'message' => 'User Not Found',
-            ], 401);
+                'message' => 'User Not Found.',
+            ], 404);
         }
     }
 
-    public function resetPassword(ResetPasswordRequest $request)
+    public function friends(Request $request)
     {
-        $user = User::where('email', $request->only('email'))->first();
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-        $status == Password::RESET_LINK_SENT
-            ? back()->with('status', __($status))
-            : back()->withInput($request->only('email'))
-            ->withErrors(['email' => __($status)]);
-        if ($status === 'passwords.sent') {
-            return response()->json([
-                'status' => true,
-                'message' => 'Sent Email Successfully , check your email and change your password',
-                'user' => $user
-            ], 200);
+        $friends = FriendRequest::where(function ($q) use ($request) {
+            $q->where('sender_id', auth()->user()->id)
+                ->orwhere('receiver_id', auth()->user()->id);
+        })->where('status', 'accepted')->get();
+        if ($friends) {
+            return FriendsResource::collection($friends);
         } else {
             return response()->json([
                 'status' => false,
-                'message' => $status,
-            ], 500);
+                'message' => ' No Friends for You',
+            ], 404);
         }
     }
 
-    public function socialiteLogin($provider)
+    public function search(SearchUserRequest $request)
     {
-        if ($provider === 'facebook' || $provider === 'google' || $provider === 'github') {
-            try {
-                $Url = Socialite::with($provider)->stateless()->redirect()->getTargetUrl();
-                return response()->json([
-                    'status' => true,
-                    'Url' => $Url,
-                ], 200);
-            } catch (\Throwable $th) {
-                return response()->json([
-                    'status' => false,
-                    'message' => $th->getMessage()
-                ], 500);
-            }
+        $users = User::where('name', 'LIKE', '%' . $request->search . '%')->get();
+        if (!$users->isEmpty()) {
+            return SearchResource::collection($users);
         } else {
             return response()->json([
-                'status' => false,
-                'message' => 'Provider must be github or facebook or google',
-            ], 401);
+                'message' => 'Not found Users',
+            ], 404);
         }
     }
 
-    public function socialiteRedirect($provider)
-    {
-        $socialite = Socialite::driver($provider)->stateless()->user();
-        $user = User::where('email', $socialite->getEmail())->first();
-        if (!$user) {
-            $user = User::updateOrCreate([
-                'provider' => $provider,
-                'provider_id' => $socialite->getId(),
-            ], [
-                'name' => $socialite->getName(),
-                'email' => $socialite->getEmail(),
-                'bio' => $socialite->getEmail(),
-
-            ]);
-        }
-        return response()->json([
-            'status' => true,
-            'message' => 'login ' . $provider . ' Successfully',
-            'token' => $user->createToken("API TOKEN")->plainTextToken,
-            'user' => $user,
-        ], 200);
-    }
 }

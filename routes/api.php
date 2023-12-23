@@ -1,29 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
+
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    Route::post('/update', [UserController::class, 'update']);
-
-});
-
-                  /* User authentication Route */
-Route::controller(UserController::class)->group(function () {
+///////////////////////////////////  Authentication Route ///////////////////////////////////
+Route::controller(\App\Http\Controllers\AuthenticationController::class)->group(function () {
     Route::middleware('guest')->group(function () {
         Route::post('register', 'register');
         Route::post('login', 'login');
@@ -33,11 +16,53 @@ Route::controller(UserController::class)->group(function () {
             Route::get('{provider}/redirect', 'socialiteRedirect');
         });
     });
-    Route::post('/update', 'update')->middleware('auth:sanctum');
+    Route::middleware('auth:sanctum')->prefix('user')->group(function () {
+        Route::post('/update', 'update');
+        Route::get('/logout', 'logout');
+        Route::post('/delete', 'delete');
+    });
 });
-                   /* End User Route */
+///////////////////////////////////   End Authentication Route ///////////////////////////////////
 
 
+///////////////////////////////////  User  Route ///////////////////////////////////
+Route::controller(UserController::class)->prefix('user')->middleware('auth:sanctum')->group(function () {
+    Route::post('/search', 'search');
+    Route::get('/show/{id}', 'show');
+    Route::get('/friends', 'friends');
+});
+///////////////////////////////////  End User Route ///////////////////////////////////
+
+
+///////////////////////////////////   friendRequest Route  ///////////////////////////////////
+Route::controller(\App\Http\Controllers\FriendRequestController::class)->middleware('auth:sanctum')->prefix('requests')->group(function () {
+    Route::get('/sendRequest/{id}', 'sendRequest');
+    Route::get('/removeRequest/{id}', 'removeRequest');
+    Route::get('/acceptRequest/{id}', 'acceptRequest');
+    Route::get('/rejectRequest/{id}', 'rejectRequest');
+    Route::get('/friends', 'friends');
+});
+///////////////////////////////////  End FriendRequest Route  ///////////////////////////////////
+
+
+///////////////////////////////////   Chat Route  ///////////////////////////////////
+Route::controller(\App\Http\Controllers\ChatController::class)->middleware('auth:sanctum')->prefix('chat')->group(function () {
+    Route::post('/sendMessage/{id}', 'sendMessage');
+    Route::get('/showMessage/{id}', 'showMessage');
+    Route::get('/removeMessage/{id}', 'removeMessage');
+
+});
+///////////////////////////////////  End Chat Route  ///////////////////////////////////
+
+
+///////////////////////////////////   Post Route  ///////////////////////////////////
+Route::controller(\App\Http\Controllers\PostController::class)->middleware('auth:sanctum')->prefix('post')->group(function () {
+
+    Route::get('/create', 'create');
+
+
+});
+///////////////////////////////////  End Post Route  ///////////////////////////////////
 
 
 

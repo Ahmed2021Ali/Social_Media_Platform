@@ -16,7 +16,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticationController extends Controller
 {
-
+    /* Register a new user */
     public function register(StoreUserRequest $request)
     {
         $dataValidated = $request->validated();
@@ -24,15 +24,14 @@ class AuthenticationController extends Controller
         if ($request->file) {
             $user->addMediaFromRequest('file')->toMediaCollection('usersImages');
         }
-        return response()->json([
-            'status' => true,
-            'message' => 'User Created Successfully',
+        return response()->json(['status' => true, 'message' => 'User Created Successfully',
             'token' => $user->createToken("API TOKEN")->plainTextToken,
             'user' => new UserhResource($user),
         ], 200);
     }
 
 
+    /* Login a  user */
     public function login(LoginUserRequest $request)
     {
         if (!Auth::attempt($request->only(['email', 'password']))) {
@@ -51,7 +50,7 @@ class AuthenticationController extends Controller
         }
     }
 
-
+    /* Update  user */
     public function update(UpdateUserRequest $request)
     {
         $user = $request->user();
@@ -69,6 +68,7 @@ class AuthenticationController extends Controller
     }
 
 
+    /*  Set a new password */
     public function resetPassword(ResetPasswordRequest $request)
     {
         $user = User::where('email', $request->only('email'))->first();
@@ -89,11 +89,12 @@ class AuthenticationController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => $status,
-            ], 500);
+            ],500);
         }
     }
 
 
+    /* Log in using social Media */
     public function socialiteLogin($provider)
     {
         if ($provider === 'facebook' || $provider === 'google' || $provider === 'github') {
@@ -107,17 +108,15 @@ class AuthenticationController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => $th->getMessage()
-                ], 500);
+                ]);
             }
         } else {
             return response()->json([
                 'status' => false,
                 'message' => 'Provider must be github or facebook or google',
-            ], 401);
+            ], 404);
         }
     }
-
-
     public function socialiteRedirect($provider)
     {
         $socialite = Socialite::driver($provider)->stateless()->user();
@@ -141,22 +140,28 @@ class AuthenticationController extends Controller
         ], 200);
     }
 
+
+    /* Log out Account   */
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'user logged out',
-        ], 200);
+        return response()->json(['status' => true, 'message' => 'user logged out',]);
     }
 
+    /* Log out Account all Device  */
+    public function logoutAllDevice(Request $request)
+    {
+        $brearWithId = explode('|', $request->header('Authorization'))[0];
+        $tokenId= explode(' ',$brearWithId)[1];
+        Auth::user()->tokens()->where('id',$tokenId)->delete();
+        return response()->json(['status' => true, 'message' => 'user log out all device login it',]);
+    }
 
+    /* delete Account */
     public function delete(Request $request)
     {
         $request->user()->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'delete account successfully',
-        ], 200);
+        return response()->json(['status' => true, 'message' => 'delete account successfully'], 201);
     }
+
 }

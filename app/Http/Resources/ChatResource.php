@@ -16,8 +16,9 @@ class ChatResource extends JsonResource
     {
 
         return [
+            'id' => $this->id,
             'Message' => $this->message,
-            'file'=>$this->getFirstMediaUrl('chatImages'),
+            'files'=>ImagesResource::collection($this->getMedia('chatFiles')),
             'sender Message' => $this->sender->name,
             'receiver Message'=> $this->receiver->name,
         ];

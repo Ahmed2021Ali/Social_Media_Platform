@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FriendsResource extends JsonResource
+class SharePostResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +15,10 @@ class FriendsResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            new UserhResource($this->sender_id != auth()->user()->id ? $this->sender : $this->receiver)
+            'id' => $this->id,
+            'title' => $this->title,
+            //'share By'=>new UserhResource($this->shareBy),
+            'Post'=>new PostResource($this->post),
         ];
     }
 }

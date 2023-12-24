@@ -64,4 +64,9 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(FriendRequest::class,'receiver_id');
     }
 
+    public function sharePosts()
+    {
+        return $this->hasMany(SharePost::class,'share_by');
+    }
+
 }

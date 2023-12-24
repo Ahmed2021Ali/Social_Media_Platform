@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('birth')->nullable();
             $table->string('bio')->nullable();
-            $table->text('file')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('provider_id')->nullable();

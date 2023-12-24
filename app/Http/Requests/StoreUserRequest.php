@@ -20,7 +20,7 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email'=>['required','unique:users,email'],
-            'phone'=>['required','unique:users,phone','regex:/(01)[0-9]{9}/'],
+            'phone'=>['required','unique:users,phone','regex:/^01[0-2,5,9]{1}[0-9]{8}$/'],
             'password' => ['required', 'confirmed'],
             'bio'=>['nullable','string'],
             'birth'=>['required','date'],

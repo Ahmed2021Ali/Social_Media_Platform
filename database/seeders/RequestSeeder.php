@@ -13,5 +13,5 @@ class RequestSeeder extends Seeder
 
     public function run(): void
     {
-        \App\Models\FriendRequest::factory(1000)->create();}
+        \App\Models\FriendRequest::factory(150)->create();}
 }

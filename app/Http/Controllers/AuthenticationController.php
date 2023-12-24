@@ -25,9 +25,9 @@ class AuthenticationController extends Controller
             $user->addMediaFromRequest('file')->toMediaCollection('usersImages');
         }
         return response()->json(['status' => true, 'message' => 'User Created Successfully',
-            'token' => $user->createToken("API TOKEN")->plainTextToken,
+            'token' => $user->createToken("User Token")->plainTextToken,
             'user' => new UserhResource($user),
-        ], 200);
+        ], 201);
     }
 
 
@@ -44,9 +44,9 @@ class AuthenticationController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Login  Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'token' => $user->createToken("User Token")->plainTextToken,
                 'user' => new UserhResource($user),
-            ], 200);
+            ], 201);
         }
     }
 

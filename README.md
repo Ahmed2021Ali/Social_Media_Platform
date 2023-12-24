@@ -1,17 +1,23 @@
 
 
-## Contributing
+#Social media platform..
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+##/ The user can create an account very easily and can also access his account from more than one device..
+• You can also log in through Facebook, Google, or GitHub
+• You can also set a new password through a message that will be sent to your email
 
-## Code of Conduct
+##/ The user can modify data, such as modifying the personal photo, changing the password, or logging out of all devices on which his account is logged in.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+##/ The user can upload a post and can also attach photos or video to this post that will be seen by all his friends or whoever visits his account, and he can also edit it after that or delete it if he wants.
 
-## Security Vulnerabilities
+* The user can share from a friend’s uploaded post and attach some words to this post if he wants.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* You can comment on posts or interact with them, and you can upload pictures or videos in the comments, or both.
 
-## License
+* The user can see the posts of friends or see the posts of non-friends by visiting their account.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+  ##/ The user can send a friend request to another user, accept the friend request that has been sent, or delete it..
+
+##/ Any user can visit another user’s account or see the posts that he publishes..
+
+##/ Any user can correspond with another user and talk to him..

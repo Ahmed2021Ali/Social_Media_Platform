@@ -26,5 +26,3 @@
 
     https://github.com/Ahmed2021Ali/Social_Media_Platform/blob/main/Social_Media_Platform.postman_collection.json
 
-[Visit My Website]([https://www.example.com](https://github.com/Ahmed2021Ali/Social_Media_Platform/blob/main/Social_Media_Platform.postman_collection.json)https://github.com/Ahmed2021Ali/Social_Media_Platform/blob/main/Social_Media_Platform.postman_collection.json)
-

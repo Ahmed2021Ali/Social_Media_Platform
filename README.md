@@ -2,13 +2,13 @@
 
 #Social media platform..
 
-##/ The user can create an account very easily and can also access his account from more than one device..
+## / The user can create an account very easily and can also access his account from more than one device..
 • You can also log in through Facebook, Google, or GitHub
 • You can also set a new password through a message that will be sent to your email
 
-##/ The user can modify data, such as modifying the personal photo, changing the password, or logging out of all devices on which his account is logged in.
+## / The user can modify data, such as modifying the personal photo, changing the password, or logging out of all devices on which his account is logged in.
 
-##/ The user can upload a post and can also attach photos or video to this post that will be seen by all his friends or whoever visits his account, and he can also edit it after that or delete it if he wants.
+## / The user can upload a post and can also attach photos or video to this post that will be seen by all his friends or whoever visits his account, and he can also edit it after that or delete it if he wants.
 
 * The user can share from a friend’s uploaded post and attach some words to this post if he wants.
 
@@ -16,8 +16,8 @@
 
 * The user can see the posts of friends or see the posts of non-friends by visiting their account.
 
-  ##/ The user can send a friend request to another user, accept the friend request that has been sent, or delete it..
+  ## / The user can send a friend request to another user, accept the friend request that has been sent, or delete it..
 
-##/ Any user can visit another user’s account or see the posts that he publishes..
+## / Any user can visit another user’s account or see the posts that he publishes..
 
-##/ Any user can correspond with another user and talk to him..
+##  / Any user can correspond with another user and talk to him..

@@ -21,3 +21,6 @@
 ### 5/ Any user can visit another user’s account or see the posts that he publishes.
 
 ### 6/ Any user can correspond with another user and talk to him.
+
+## File Postmain 
+[a link]([https://github.com/user/repo/blob/branch/other_file.md](https://github.com/Ahmed2021Ali/Social_Media_Platform/blob/main/Social_Media_Platform.postman_collection.json)https://github.com/Ahmed2021Ali/Social_Media_Platform/blob/main/Social_Media_Platform.postman_collection.json)

@@ -1,0 +1,1620 @@
+{
+	"info": {
+		"_postman_id": "d8615b26-f618-4ec4-a322-a7d52286586e",
+		"name": "Social_Media_Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26045146"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 5|sfYnOl4C5ZvRLxQx3H2et36j7RMgGGY7cq188pTl9ad21c80",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/show/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"show",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|5VaH2iC60w9fn9EsnQ3fPKwN8caA2i86bzYh1HWSfeb8ed29",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "search",
+									"value": "s",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/search",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "news Feed",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|KfmWaTOrCrg1a0EIWMgyisWYuTzSv6I58lAoMEtP11773123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "search",
+									"value": "khalede",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/news_feed",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"news_feed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "friends",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|KfmWaTOrCrg1a0EIWMgyisWYuTzSv6I58lAoMEtP11773123",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/friends",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"friends"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "application/jso",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "showCurrentUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|i8cdHYDT16azDsWdsSsItvQFYheyVM9Pby4a52El6717ddab",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/showCurrentUser",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"showCurrentUser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "requests",
+			"item": [
+				{
+					"name": "sendRequest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|p1rKgTFT1WM4NjTdXPLocNyxVnkB6YrFMiusBIASe17165bf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "receiver_id",
+									"value": "3",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/requests/sendRequest/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requests",
+								"sendRequest",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeRequest",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 17|x3wHPdwtJ7WLzDBWfXPfCy2vhLgXRF5Vb3YSHnxc3ceda4f1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "receiver_id",
+									"value": "3",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/requests/removeRequest/8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requests",
+								"removeRequest",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "acceptRequest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 17|x3wHPdwtJ7WLzDBWfXPfCy2vhLgXRF5Vb3YSHnxc3ceda4f1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "receiver_id",
+									"value": "3",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/requests/acceptRequest/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requests",
+								"acceptRequest",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rejectRequest",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 17|x3wHPdwtJ7WLzDBWfXPfCy2vhLgXRF5Vb3YSHnxc3ceda4f1",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/requests/rejectRequest/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requests",
+								"rejectRequest",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sent Friend Requests",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|p1rKgTFT1WM4NjTdXPLocNyxVnkB6YrFMiusBIASe17165bf",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/requests/friends",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"requests",
+								"friends"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "khalede",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "asa@c.gga",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "011659922327021173313agaa",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "text"
+								},
+								{
+									"key": "birth",
+									"value": "12/11/1981",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123123123",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "sssssssssssssssssss",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (73).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "hettinger.jaunita@example.net",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 20|8ALstBgvIPMsQ4YMH0axjpb95tEHjczAVktaZqzA9bc2a3d8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "hg@gmail.comd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/resetPassword",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "socialiteLogin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/socialite/facebook/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"socialite",
+								"facebook",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 14|opUWM4UVOWoi9be0ipb9XyAxOcM8sOYEVHYyhTs0ab826a2b",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/user/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 40|qYi4STUbqNmajtTqWomWnkNR931SDxrpSVdvl1mY5dbc4dd8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "moooooo",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "as@a.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "01014486080",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "aaaaaaaaaaaaaaa",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "text"
+								},
+								{
+									"key": "birth",
+									"value": "12/11/1981",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123123123",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (73).png"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"update"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "16|ufL9ws27RKNWjw5x5oVlhZkVt7XKHV9n5zcse7F423c545be",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete acount",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 39|zzJIRMvcKJ6J6WsNfwu5ZoGEBCzyejx6BYJ4p6mF691f3949",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout All  device",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 4|X5qooeCTtUd0eWudkqYdTQ75Pcj2391xNoBtiX8s336b784e",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/logoutAllDevice",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"logoutAllDevice"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chat",
+			"item": [
+				{
+					"name": "sendMessage",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 2|vjp5oIYGFvgm9YbI6gK7LFhScl5qkRPnYd8nZXY278d63579",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "message",
+									"value": "33333333333333333333333",
+									"type": "text"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (73).png"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (77).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/chat/sendMessage/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"chat",
+								"sendMessage",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "showMessage",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|p1rKgTFT1WM4NjTdXPLocNyxVnkB6YrFMiusBIASe17165bf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "message",
+									"value": "ازيك ي خالد اية  انا محمد",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (74).png",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/chat/showMessage/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"chat",
+								"showMessage",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove message",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 17|x3wHPdwtJ7WLzDBWfXPfCy2vhLgXRF5Vb3YSHnxc3ceda4f1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "message",
+									"value": "ازيك ي خالد اية  انا محمد",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/chat/removeMessage/111",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"chat",
+								"removeMessage",
+								"111"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|p1rKgTFT1WM4NjTdXPLocNyxVnkB6YrFMiusBIASe17165bf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "aaaaaaaaaaaaaaaaaaa",
+									"type": "text"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": [
+										"/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (81).png",
+										"/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png"
+									]
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": [
+										"/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png",
+										"/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png"
+									]
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/post/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 40|qYi4STUbqNmajtTqWomWnkNR931SDxrpSVdvl1mY5dbc4dd8",
+								"type": "text"
+							},
+							{
+								"key": "36|vAWJUuRMafsHmZfO3cbYM2JhFGFA3lpnQAMl7bGYe14cc19f",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "uuuuuuuuuuuuuuuuj",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/post/update/78",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								"update",
+								"78"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 36|vAWJUuRMafsHmZfO3cbYM2JhFGFA3lpnQAMl7bGYe14cc19f",
+								"type": "text"
+							},
+							{
+								"key": "36|vAWJUuRMafsHmZfO3cbYM2JhFGFA3lpnQAMl7bGYe14cc19f",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "ssssssssssssss",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png",
+									"disabled": true
+								},
+								{
+									"key": "_method",
+									"value": "delete",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/post/delete/61",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								"delete",
+								"61"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 40|qYi4STUbqNmajtTqWomWnkNR931SDxrpSVdvl1mY5dbc4dd8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "cccccccccccccccccccccccccccccccccccccc",
+									"type": "text"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/comment/create/82",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"create",
+								"82"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 40|qYi4STUbqNmajtTqWomWnkNR931SDxrpSVdvl1mY5dbc4dd8",
+								"type": "text"
+							},
+							{
+								"key": "36|vAWJUuRMafsHmZfO3cbYM2JhFGFA3lpnQAMl7bGYe14cc19f",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "uuuuuuuuuuuuuuuuj",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (81).png"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/comment/update/21",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"update",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 40|qYi4STUbqNmajtTqWomWnkNR931SDxrpSVdvl1mY5dbc4dd8",
+								"type": "text"
+							},
+							{
+								"key": "36|vAWJUuRMafsHmZfO3cbYM2JhFGFA3lpnQAMl7bGYe14cc19f",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "ssssssssssssss",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png",
+									"disabled": true
+								},
+								{
+									"key": "_method",
+									"value": "delete",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/comment/delete/21",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"delete",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 40|qYi4STUbqNmajtTqWomWnkNR931SDxrpSVdvl1mY5dbc4dd8",
+								"type": "text"
+							},
+							{
+								"key": "36|vAWJUuRMafsHmZfO3cbYM2JhFGFA3lpnQAMl7bGYe14cc19f",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "ssssssssssssss",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png",
+									"disabled": true
+								},
+								{
+									"key": "_method",
+									"value": "delete",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/comment/post/82",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"post",
+								"82"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Interaction",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 40|qYi4STUbqNmajtTqWomWnkNR931SDxrpSVdvl1mY5dbc4dd8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "like",
+									"type": "text"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png",
+									"disabled": true
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/interaction/create/79",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"interaction",
+								"create",
+								"79"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 40|qYi4STUbqNmajtTqWomWnkNR931SDxrpSVdvl1mY5dbc4dd8",
+								"type": "text"
+							},
+							{
+								"key": "36|vAWJUuRMafsHmZfO3cbYM2JhFGFA3lpnQAMl7bGYe14cc19f",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "ssssssssssssss",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "/C:/Users/Souk Alasr/Pictures/Screenshots/Screenshot (82).png",
+									"disabled": true
+								},
+								{
+									"key": "_method",
+									"value": "delete",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/comment/delete/21",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"delete",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 40|qYi4STUbqNmajtTqWomWnkNR931SDxrpSVdvl1mY5dbc4dd8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/interaction/post/82",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"interaction",
+								"post",
+								"82"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "share post",
+			"item": [
+				{
+					"name": "share post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|uV9OPNsWUKs9fVjXd0qfIzMHr3GNycdcmCUeUht8346429c8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "aaaaaaaa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/sharePost/create/19",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sharePost",
+								"create",
+								"19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|uV9OPNsWUKs9fVjXd0qfIzMHr3GNycdcmCUeUht8346429c8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "zzzz",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/sharePost/update/20",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sharePost",
+								"update",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete share",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|uV9OPNsWUKs9fVjXd0qfIzMHr3GNycdcmCUeUht8346429c8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "zzzz",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/sharePost/delete/19",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sharePost",
+								"delete",
+								"19"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

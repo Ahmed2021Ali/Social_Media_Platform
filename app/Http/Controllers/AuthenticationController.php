@@ -114,7 +114,7 @@ class AuthenticationController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Provider must be github or facebook or google',
-            ], 404);
+            ], 400);
         }
     }
     public function socialiteRedirect($provider)

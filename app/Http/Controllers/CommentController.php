@@ -13,19 +13,16 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     /* create Comment */
-    public function create(CreateCommentRequest $request, $id)
+    public function create(CreateCommentRequest $request, Post $post)
     {
-        $data = $request->validated();
-        if (isset($data['title']) || isset($data['files'])) {
-            $comment = Comment::create(['title' => $request->title, 'user_id' => auth()->user()->id, 'post_id' => $id]);
-            if ($request->files) {
-                foreach ($request->files as $file) {
-                    foreach ($file as $f) {
-                        $comment->addMedia($f)->toMediaCollection('commentFiles');
-                    }
+        if (isset($request['title']) || isset($request['files'])) {
+            $comment = Comment::create(['title' => $request->title, 'user_id' => auth()->user()->id, 'post_id' => $post->id]);
+            if ($request['files']) {
+                foreach ($request['files'] as $file) {
+                    $comment->addMedia($file)->toMediaCollection('chatFiles');
                 }
             }
-            return response()->json(['status' => true,'message' => ' Comment  created Successfully', 'Comment' => new CommentResource($comment)], 201);
+            return response()->json(['status' => true, 'message' => ' Comment  created Successfully', 'Comment' => new CommentResource($comment)], 201);
         } else {
             return response()->json(['status' => false, 'message' => 'Comment required'], 402);
         }
@@ -33,50 +30,31 @@ class CommentController extends Controller
 
     /* Who can modify the Comment is the one who created it only */
 
-    public function update(UpdateCommentRequest $request, $id)
+    public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        $comment = Comment::find($id);
-        if ($comment) {
-            if ($request->title) {
-                $comment->update(['title' => $request->title]);
-            }
-            if ($request->files) {
-                $comment->media()->delete();
-                foreach ($request->files as $file) {
-                    foreach ($file as $f) {
-                        $comment->addMedia($f)->toMediaCollection('commentFiles');
-                    }
-                }
-            }
-            return response()->json(['status' => true,'message' => ' Comment  Update Successfully', 'Comment' => new CommentResource($comment)], 201);
-        } else {
-            return response()->json(['status' => false, 'message' => 'Comment Not Found'], 402);
+        if ($request->title) {
+            $comment->update(['title' => $request->title]);
         }
+        if ($request['files']) {
+            $comment->media()->delete();
+            foreach ($request['files'] as $file) {
+                $comment->addMedia($file)->toMediaCollection('commentFiles');
+            }
+        }
+        return response()->json(['status' => true, 'message' => ' Comment  Update Successfully', 'Comment' => new CommentResource($comment)], 201);
     }
 
     /* Who can delete the comment is the one who created it only */
 
-    public function delete(Request $request, $id)
+    public function delete(Request $request, Comment $comment)
     {
-        $comment = Comment::find($id);
-        if ($comment) {
-            $comment->delete();
-            return response()->json(['status' => true, 'message' => 'comment delete successfully'], 201);
-        } else {
-            return response()->json(['status' => false, 'message' => 'comment Not Found'], 402);
-        }
+        $comment->delete();
+        return response()->json(['status' => true, 'message' => 'comment delete successfully'], 201);
     }
 
     /* View all the comments of one of the posts */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::where('id', $id)->first();
-        if ($post) {
-            $comments = Comment::where('post_id', $id)->get();
-            return response()->json(['status' => true, 'post' => new PostResource($post),
-                'comments' => CommentResource::collection($comments)], 200);
-        } else {
-            return response()->json(['status' => false, 'message' => 'post Not found'], 402);
-        }
+        return response()->json(['status' => true, 'post' => new PostResource($post), 'comments' => CommentResource::collection($post->comments)], 200);
     }
 }

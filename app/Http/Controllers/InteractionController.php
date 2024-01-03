@@ -12,49 +12,34 @@ use Illuminate\Validation\Rule;
 class InteractionController extends Controller
 {
     /* create Interactions */
-    public function create(Request $request, $id)
+    public function create(Request $request, Post $post)
     {
         $request->validate(['type' => ['required', Rule::in(['like', 'love'])]]);
-        $post = Post::find($id);
-        if ($post) {
-            $interaction = Interaction::where('type', $request->type)->where('user_id', auth()->user()->id)->where('post_id', $id)->first();
-            if ($interaction) {
-                return response()->json(['status' => false, 'message' => 'Interaction already exist', 'Interaction' => new InteractionResource($interaction)], 400);
-            } else {
-                $interaction = Interaction::create(['type' => $request->type, 'user_id' => auth()->user()->id, 'post_id' => $id]);
-                return response()->json(['status' => true, 'message' => 'Interaction created', 'Interaction' => new InteractionResource($interaction)], 201);
-            }
+        $interaction = Interaction::where('type', $request->type)->where('user_id', auth()->user()->id)->where('post_id', $post->id)->first();
+        if ($interaction) {
+            return response()->json(['status' => false, 'message' => 'Interaction already exist', 'Interaction' => new InteractionResource($interaction)], 400);
         } else {
-            return response()->json(['status' => false, 'message' => 'post  Not Found'], 402);
+            $interaction = Interaction::create(['type' => $request->type, 'user_id' => auth()->user()->id, 'post_id' => $post->id]);
+            return response()->json(['status' => true, 'message' => 'Interaction created', 'Interaction' => new InteractionResource($interaction)], 201);
         }
     }
 
 
     /* Who can delete the Interactions is the one who created it only */
 
-    public function delete(Request $request, $id)
+    public function delete(Request $request, Interaction $interaction)
     {
-        $interaction = Interaction::find($id);
-        if ($interaction) {
-            $interaction->delete();
-            return response()->json(['status' => true, 'message' => 'interaction delete successfully'], 201);
-        } else {
-            return response()->json(['status' => false, 'message' => 'interaction Not Found'], 402);
-        }
+        $interaction->delete();
+        return response()->json(['status' => true, 'message' => 'interaction delete successfully'], 201);
     }
 
     /* View all the Interaction of one of the posts */
 
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::where('id', $id)->first();
-        if ($post) {
-            $interactions = Interaction::where('post_id', $id)->get();
-            return response()->json(['status' => true, 'post' => new PostResource($post),
-                'interactions' => InteractionResource::collection($interactions)], 200);
-        } else {
-            return response()->json(['status' => false, 'message' => 'post Not found'], 402);
-        }
+        return response()->json(['status' => true,
+            'post' => new PostResource($post),
+            'interactions' => InteractionResource::collection($post->interactions)], 200);
     }
 
 

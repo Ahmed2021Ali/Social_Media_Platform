@@ -6,7 +6,20 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+        <script>
 
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('6ea9631d4ada3cea3025', {
+                cluster: 'ap1'
+            });
+            var channel = pusher.subscribe('chat');
+            channel.bind('{{ auth()->user()->id }}', function(data) {
+                alert(JSON.stringify(data));
+            });
+        </script>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

@@ -29,8 +29,9 @@ Route::controller(\App\Http\Controllers\AuthenticationController::class)->group(
 Route::controller(UserController::class)->prefix('user')->middleware('auth:sanctum')->group(function () {
     Route::post('/search', 'search');
     Route::get('/showCurrentUser', 'showCurrentUser');
-    Route::get('/show/{id}', 'show');
+    Route::get('/show/{user}', 'show');
     Route::get('/friends', 'friends');
+    Route::get('/chats', 'chats');
     Route::get('/news_feed', 'newsFeed');
 });
 ///////////////////////////////////  End User Route ///////////////////////////////////
@@ -38,10 +39,10 @@ Route::controller(UserController::class)->prefix('user')->middleware('auth:sanct
 
 ///////////////////////////////////   friendRequest Route  ///////////////////////////////////
 Route::controller(\App\Http\Controllers\FriendRequestController::class)->middleware('auth:sanctum')->prefix('requests')->group(function () {
-    Route::get('/sendRequest/{id}', 'sendRequest');
-    Route::delete('/removeRequest/{id}', 'removeRequest');
-    Route::get('/acceptRequest/{id}', 'acceptRequest');
-    Route::get('/rejectRequest/{id}', 'rejectRequest');
+    Route::get('/sendRequest/{user}', 'sendRequest');
+    Route::delete('/removeRequest/{user}', 'removeRequest');
+    Route::get('/acceptRequest/{user}', 'acceptRequest');
+    Route::get('/rejectRequest/{user}', 'rejectRequest');
     Route::get('/friends', 'friends');
 });
 ///////////////////////////////////  End FriendRequest Route  ///////////////////////////////////
@@ -49,9 +50,9 @@ Route::controller(\App\Http\Controllers\FriendRequestController::class)->middlew
 
 ///////////////////////////////////   Chat Route  ///////////////////////////////////
 Route::controller(\App\Http\Controllers\ChatController::class)->middleware('auth:sanctum')->prefix('chat')->group(function () {
-    Route::post('/sendMessage/{id}', 'sendMessage');
-    Route::get('/showMessage/{id}', 'showMessage');
-    Route::DELETE('/removeMessage/{id}', 'removeMessage');
+    Route::post('/sendMessage/{user}', 'sendMessage');
+    Route::get('/showChat/{chat}', 'showChat');
+    Route::DELETE('/removeMessage/{message}', 'removeMessage');
 });
 ///////////////////////////////////  End Chat Route  ///////////////////////////////////
 
@@ -59,18 +60,18 @@ Route::controller(\App\Http\Controllers\ChatController::class)->middleware('auth
 ///////////////////////////////////   Post Route  ///////////////////////////////////
 Route::controller(\App\Http\Controllers\PostController::class)->middleware('auth:sanctum')->prefix('post')->group(function () {
     Route::post('/create', 'create');
-    Route::PUT('/update/{id}', 'update');
-    Route::delete('/delete/{id}', 'delete');
+    Route::PUT('/update/{post}', 'update');
+    Route::delete('/delete/{post}', 'delete');
 });
 ///////////////////////////////////  End Post Route  ///////////////////////////////////
 
 
 ///////////////////////////////////   Comments Route  ///////////////////////////////////
 Route::controller(\App\Http\Controllers\CommentController::class)->middleware('auth:sanctum')->prefix('comment')->group(function () {
-    Route::post('/create/{id}', 'create');
-    Route::PUT('/update/{id}', 'update');
-    Route::delete('/delete/{id}', 'delete');
-    Route::get('/post/{id}', 'show');
+    Route::post('/create/{post}', 'create');
+    Route::PUT('/update/{comment}', 'update');
+    Route::delete('/delete/{comment}', 'delete');
+    Route::get('/post/{post}', 'show');
 
 });
 ///////////////////////////////////  End Comments Route  ///////////////////////////////////
@@ -78,18 +79,18 @@ Route::controller(\App\Http\Controllers\CommentController::class)->middleware('a
 
 ///////////////////////////////////   Interaction Route  ///////////////////////////////////
 Route::controller(\App\Http\Controllers\InteractionController::class)->middleware('auth:sanctum')->prefix('interaction')->group(function () {
-    Route::post('/create/{id}', 'create');
-    Route::delete('/delete/{id}', 'delete');
-    Route::get('/post/{id}', 'show');
+    Route::post('/create/{post}', 'create');
+    Route::delete('/delete/{interaction}', 'delete');
+    Route::get('/post/{post}', 'show');
 });
 ///////////////////////////////////  End Interaction Route  ///////////////////////////////////
 
 
 ///////////////////////////////////   Interaction Route  ///////////////////////////////////
 Route::controller(\App\Http\Controllers\SharePostController::class)->middleware('auth:sanctum')->prefix('sharePost')->group(function () {
-    Route::post('/create/{id}', 'create');
-    Route::put('/update/{id}', 'update');
-    Route::delete('/delete/{id}', 'delete');
+    Route::post('/create/{post}', 'create');
+    Route::put('/update/{sharePost}', 'update');
+    Route::delete('/delete/{sharePost}', 'delete');
 });
 ///////////////////////////////////  End Interaction Route  ///////////////////////////////////
 

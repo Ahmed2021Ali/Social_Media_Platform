@@ -11,47 +11,35 @@ use Illuminate\Http\Request;
 class SharePostController extends Controller
 {
 
-    public function create(Request $request, $id)
+    public function create(Request $request, Post $post)
     {
         $request->validate(['title' => 'required|max:255',]);
-        $post = Post::find($id);
-        if ($post) {
-            $postShared = SharePost::create([
-                'title' => $request->title,
-                'post_id' => $post->id,
-                'share_by' => auth()->user()->id
-            ]);
-            return response()->json(['status' => true, 'message' => 'Post  Shared Successfully',
-                'share'=>new SharePostResource($postShared)], 201);
-        } else {
-            return response()->json(['status' => false, 'message' => ' Post  Not found'], 402);
-        }
+        $postShared = SharePost::create([
+            'title' => $request->title,
+            'post_id' => $post->id,
+            'share_by' => auth()->user()->id
+        ]);
+        return response()->json(['status' => true,
+            'message' => 'Post  Shared Successfully',
+            'share' => new SharePostResource($postShared)], 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, SharePost $sharePost)
     {
         $request->validate(['title' => 'required|max:255',]);
-        $postShared = SharePost::find($id);
-        if ($postShared) {
-            if ($request->title) {
-                $postShared->update(['title' => $request->title]);
-            }
-            return response()->json(['status' => true, 'message' => 'Post  Shared  has Updated Successfully',
-                'share'=>new SharePostResource($postShared)], 201);
-        } else {
-            return response()->json(['status' => false, 'message' => ' Post has Shared Not found'], 402);
+        if ($request->title) {
+            $sharePost->update(['title' => $request->title]);
         }
+        return response()->json(['status' => true,
+            'message' => 'Post  Shared  has Updated Successfully',
+            'share' => new SharePostResource($sharePost)], 201);
     }
 
-    public function delete($id)
+    public function delete(SharePost $sharePost)
     {
-        $postShared = SharePost::find($id);
-        if ($postShared) {
-            $postShared->delete();
-            return response()->json(['status' => true, 'message' => ' share of post deleted successfully',
-                'share By' => new UserhResource(auth()->user())], 201);
-        } else {
-            return response()->json(['status' => false, 'message' => ' Post has Shared Not found'], 402);
-        }
+        $sharePost->delete();
+        return response()->json(['status' => true,
+            'message' => ' share of post deleted successfully',
+            'share By' => new UserhResource(auth()->user())], 201);
     }
 }

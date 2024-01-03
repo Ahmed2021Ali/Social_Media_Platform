@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SearchUserRequest;
+use App\Http\Resources\ChatUserResource;
 use App\Http\Resources\FriendsResource;
 use App\Http\Resources\NewsResource;
 use App\Http\Resources\SearchResource;
 use App\Http\Resources\UserhResource;
+use App\Models\Chat;
 use App\Models\FriendRequest;
 use App\Models\User;
 
@@ -15,14 +17,9 @@ class UserController extends Controller
 {
 
     /*  show user by ID */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
-        if ($user) {
-            return response()->json(['status' => true, 'User' => new UserhResource($user)], 200);
-        } else {
-            return response()->json(['status' => false, 'message' => 'User Not Found.'], 404);
-        }
+        return response()->json(['status' => true, 'User' => new UserhResource($user)], 200);
     }
 
     /*  show Current User */
@@ -34,12 +31,7 @@ class UserController extends Controller
     /*  show Friends of user by User_ID */
     public function friends()
     {
-        $friends = $this->getFriends();
-        if ($friends) {
-            return response()->json(['status' => true, 'Friends' => FriendsResource::collection($friends)], 200);
-        } else {
-            return response()->json(['status' => false, 'message' => ' No Friends for You'], 404);
-        }
+        return response()->json(['status' => true, 'Friends' => FriendsResource::collection(getFriends())], 200);
     }
 
     /* search for  user By Name */
@@ -56,15 +48,15 @@ class UserController extends Controller
     /* News Feed for  user */
     public function newsFeed()
     {
-        return response()->json(['posts' => NewsResource::collection($this->getFriends()),], 200);
+        return response()->json(['posts' => NewsResource::collection(getFriends()),], 200);
     }
 
-    public function getFriends()
+    /* chat of users */
+    public function chats()
     {
-        return FriendRequest::where(function ($q) {
-            $q->where('sender_id', auth()->user()->id)
-                ->orwhere('receiver_id', auth()->user()->id);
-        })->where('status', 'accepted')->get();
+        $chats = Chat::where('sender_id', auth()->user()->id)->Orwhere('receiver_id', auth()->user()->id)->get();
+        return response()->json(['users' => ChatUserResource::collection($chats)], 200);
     }
+
 
 }

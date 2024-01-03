@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use function Laravel\Prompts\password;
 
-class Chat extends Model
+class Message extends Model implements HasMedia
 {
-    use HasFactory ;
-    protected $fillable=['sender_id','receiver_id'];
+    use HasFactory , InteractsWithMedia;
+    protected $fillable=['content','sender_id','receiver_id','chat_id'];
 
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaCollection('chatFiles');
+    }
     public function sender()
     {
         return $this->belongsTo(User::class,'sender_id');
@@ -22,8 +25,8 @@ class Chat extends Model
     {
         return $this->belongsTo(User::class,'receiver_id');
     }
-    public function messages()
+    public function chat()
     {
-        return $this->hasMany(Message::class);
+        return $this->belongsTo(Chat::class);
     }
 }

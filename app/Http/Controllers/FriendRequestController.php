@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageSent;
+use App\Events\SentFriendRequest;
 use App\Http\Resources\FriendsResource;
 use App\Models\FriendRequest;
 use App\Models\User;
@@ -9,29 +11,26 @@ use App\Models\User;
 class FriendRequestController extends Controller
 {
     /*  Send Friend Request */
-    public function sendRequest($id)
+    public function sendRequest(User $user)
     {
-        $user = User::find($id);
-        if ($user) {
-            $friendRequest = FriendRequest::where('sender_id', auth()->user()->id)->where('receiver_id', $user->id)->first();
-            $friendRequestReceived = FriendRequest::where('sender_id', $user->id)->where('receiver_id', auth()->user()->id)->first();
-            if ($friendRequest) {
-                return response()->json(['status' => false, 'message' => 'You have already sent a friend request to ' . $friendRequest->receiver->name],402);
-            } elseif ($friendRequestReceived) {
-                return response()->json(['status' => false, 'message' => $friendRequestReceived->sender->name . ' has send you friend request already '],402);
-            } else {
-                FriendRequest::create(['sender_id' => auth()->user()->id, 'receiver_id' => $user->id]);
-                return response()->json(['status' => true, 'message' => 'You Send Friend Request to ' . $user->name,], 201);
-            }
+        $friendRequest = FriendRequest::where('sender_id', auth()->user()->id)->where('receiver_id', $user->id)->first();
+        $friendRequestReceived = FriendRequest::where('sender_id', $user->id)->where('receiver_id', auth()->user()->id)->first();
+        if ($friendRequest) {
+            return response()->json(['status' => false, 'message' => 'You have already sent a friend request to ' . $friendRequest->receiver->name], 402);
+        } elseif ($friendRequestReceived) {
+            return response()->json(['status' => false, 'message' => $friendRequestReceived->sender->name . ' has send you friend request already '], 402);
         } else {
-            return response()->json(['status' => false, 'message' => 'Receiver Not Friend '], 402);
+            //event(new SentFriendRequest($user->name));
+            broadcast(new SentFriendRequest(auth()->user()->name, $user->id))->toOthers();
+            FriendRequest::create(['sender_id' => auth()->user()->id, 'receiver_id' => $user->id]);
+            return response()->json(['status' => true, 'message' => 'You Send Friend Request to ' . $user->name,], 201);
         }
     }
 
     /*  Remove Friend Request after Sent */
-    public function removeRequest($id)
+    public function removeRequest(User $user)
     {
-        $friendRequest = FriendRequest::where('sender_id', auth()->user()->id)->where('receiver_id', $id)->first();
+        $friendRequest = FriendRequest::where('sender_id', auth()->user()->id)->where('receiver_id', $user->id)->first();
         if ($friendRequest) {
             $friendRequest->delete();
             return response()->json(['status' => true, 'message' => 'your Friend Request Remove to ' . $friendRequest->receiver->name,], 201);
@@ -41,9 +40,9 @@ class FriendRequestController extends Controller
     }
 
     /*  Accept Friend Request  */
-    public function acceptRequest($id)
+    public function acceptRequest(User $user)
     {
-        $friendRequestReceived = FriendRequest::where('sender_id', $id)->where('receiver_id', auth()->user()->id)->first();
+        $friendRequestReceived = FriendRequest::where('sender_id', $user->id)->where('receiver_id', auth()->user()->id)->first();
         if ($friendRequestReceived) {
             if ($friendRequestReceived->status === 'rejected') {
                 return response()->json(['status' => false, 'message' => 'your dont Accept Friendly Request  after Rejected to  ' . $friendRequestReceived->sender->name],);
@@ -56,13 +55,12 @@ class FriendRequestController extends Controller
         } else {
             return response()->json(['status' => false, 'message' => 'Friendly Request  Not found  ']);
         }
-
     }
 
     /*  Reject Friend Request  */
-    public function rejectRequest($sender_id)
+    public function rejectRequest(User $user)
     {
-        $friendRequest = FriendRequest::where('sender_id', $sender_id)->where('receiver_id', auth()->user()->id)->first();
+        $friendRequest = FriendRequest::where('sender_id', $user->id)->where('receiver_id', auth()->user()->id)->first();
         if ($friendRequest) {
             if ($friendRequest->status === 'accepted' || $friendRequest->status === null) {
                 $friendRequest->update(['status' => 'rejected']);

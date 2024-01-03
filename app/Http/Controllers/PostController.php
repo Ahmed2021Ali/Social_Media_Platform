@@ -13,14 +13,11 @@ class PostController extends Controller
     /* create post */
     public function create(CreatePostRequest $request)
     {
-        $data = $request->validated();
-        if (isset($data['description']) || isset($data['files'])) {
+        if ($request['description'] || $request['files']) {
             $post = Post::create(['description' => $request->description, 'user_id' => auth()->user()->id]);
-            if ($request->files) {
-                foreach ($request->files as $file) {
-                    foreach ($file as $f) {
-                        $post->addMedia($f)->toMediaCollection('postsFiles');
-                    }
+            if ($request['files']) {
+                foreach ($request['files'] as $file) {
+                    $post->addMedia($file)->toMediaCollection('postsFiles');
                 }
             }
             return response()->json(['status' => true, 'message' => 'Post  created Successfully', 'Post' => new PostResource($post)], 201);
@@ -31,38 +28,26 @@ class PostController extends Controller
 
     /* Who can modify the post is the one who created it only */
 
-    public function update(UpdatePostRequest $request, $id)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        $post = Post::find($id);
-        if ($post) {
-            if ($request->description) {
-                $post->update(['description' => $request->description]);
-            }
-            if ($request->files) {
-                $post->media()->delete();
-                foreach ($request->files as $file) {
-                    foreach ($file as $f) {
-                        $post->addMedia($f)->toMediaCollection('postsFiles');
-                    }
-                }
-            }
-            return response()->json(['status' => true, 'message' => 'Post  Update Successfully', 'Post' => new PostResource($post)], 201);
-        } else {
-            return response()->json(['status' => false, 'message' => 'post Not Found'], 402);
+        if ($request->description) {
+            $post->update(['description' => $request->description]);
         }
+        if ($request['files']) {
+            $post->media()->delete();
+            foreach ($request['files'] as $file) {
+                $post->addMedia($file)->toMediaCollection('postsFiles');
+            }
+        }
+        return response()->json(['status' => true, 'message' => 'Post  Update Successfully', 'Post' => new PostResource($post)], 201);
     }
 
     /* Who can delete the post is the one who created it only */
 
-    public function delete(Request $request, $id)
+    public function delete(Request $request, Post $post)
     {
-        $post = Post::find($id);
-        if ($post) {
-            $post->delete();
-            return response()->json(['status' => true, 'message' => 'post delete successfully'], 201);
-        } else {
-            return response()->json(['status' => false, 'message' => 'post Not Found'], 402);
-        }
+        $post->delete();
+        return response()->json(['status' => true, 'message' => 'post delete successfully'], 201);
     }
 
 }

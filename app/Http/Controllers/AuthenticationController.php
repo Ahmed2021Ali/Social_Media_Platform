@@ -19,8 +19,7 @@ class AuthenticationController extends Controller
     /* Register a new user */
     public function register(StoreUserRequest $request)
     {
-        $dataValidated = $request->validated();
-        $user = User::create(Arr::except($dataValidated, 'file'));
+        $user = User::create(Arr::except($request->validated(), 'file'));
         if ($request->file) {
             $user->addMediaFromRequest('file')->toMediaCollection('usersImages');
         }
@@ -41,9 +40,7 @@ class AuthenticationController extends Controller
             ], 401);
         } else {
             $user = User::where('email', $request->email)->first();
-            return response()->json([
-                'status' => true,
-                'message' => 'User Login  Successfully',
+            return response()->json(['status' => true, 'message' => 'User Login  Successfully',
                 'token' => $user->createToken("User Token")->plainTextToken,
                 'user' => new UserhResource($user),
             ], 201);
@@ -54,15 +51,12 @@ class AuthenticationController extends Controller
     public function update(UpdateUserRequest $request)
     {
         $user = $request->user();
-        $dataValidated = $request->validated();
         if ($request->file) {
             $user->media()->delete();
             $user->addMediaFromRequest('file')->toMediaCollection('usersImages');
         }
-        $user->update(Arr::except($dataValidated, 'file'));
-        return response()->json([
-            'status' => true,
-            'message' => 'User Update Successfully',
+        $user->update(Arr::except($request->validated(), 'file'));
+        return response()->json(['status' => true, 'message' => 'User Update Successfully',
             'user' => new UserhResource($user),
         ], 200);
     }
@@ -86,10 +80,7 @@ class AuthenticationController extends Controller
                 'user' => new UserhResource($user)
             ], 200);
         } else {
-            return response()->json([
-                'status' => false,
-                'message' => $status,
-            ],500);
+            return response()->json(['status' => false, 'message' => $status],500);
         }
     }
 
@@ -132,14 +123,9 @@ class AuthenticationController extends Controller
 
             ]);
         }
-        return response()->json([
-            'status' => true,
-            'message' => 'login ' . $provider . ' Successfully',
-            'token' => $user->createToken("API TOKEN")->plainTextToken,
-            'user' => $user,
-        ], 200);
+        return response()->json(['status' => true, 'message' => 'login ' . $provider . ' Successfully',
+            'token' => $user->createToken("API TOKEN")->plainTextToken, 'user' => $user,], 200);
     }
-
 
     /* Log out Account   */
     public function logout(Request $request)

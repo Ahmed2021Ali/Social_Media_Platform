@@ -5,20 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-        <script>
 
-            // Enable pusher logging - don't include this in production
-            Pusher.logToConsole = true;
-
-            var pusher = new Pusher('6ea9631d4ada3cea3025', {
-                cluster: 'ap1'
-            });
-            var channel = pusher.subscribe('my-channel');
-            channel.bind('my-event', function(data) {
-                alert(JSON.stringify(data));
-            });
-        </script>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />

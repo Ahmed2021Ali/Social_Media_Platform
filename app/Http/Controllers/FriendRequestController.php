@@ -20,7 +20,6 @@ class FriendRequestController extends Controller
         } elseif ($friendRequestReceived) {
             return response()->json(['status' => false, 'message' => $friendRequestReceived->sender->name . ' has send you friend request already '], 402);
         } else {
-            //event(new SentFriendRequest($user->name));
             broadcast(new SentFriendRequest(auth()->user()->name, $user->id))->toOthers();
             FriendRequest::create(['sender_id' => auth()->user()->id, 'receiver_id' => $user->id]);
             return response()->json(['status' => true, 'message' => 'You Send Friend Request to ' . $user->name,], 201);
@@ -74,7 +73,7 @@ class FriendRequestController extends Controller
     }
 
     /* Pending friend requests for the user currently logged in */
-    public function friends()
+    public function friendRequests()
     {
         $sentFriendRequests = FriendRequest::where('receiver_id', auth()->user()->id)->where('status', null)->get();
         if (!$sentFriendRequests->isEmpty()) {

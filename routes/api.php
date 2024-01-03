@@ -45,7 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/removeRequest/{user}', 'removeRequest');
         Route::get('/acceptRequest/{user}', 'acceptRequest');
         Route::get('/rejectRequest/{user}', 'rejectRequest');
-        Route::get('/friends', 'friends');
+        Route::get('/friendRequests', 'friendRequests');
     });
 ///////////////////////////////////  End FriendRequest Route  ///////////////////////////////////
 

@@ -27,7 +27,7 @@ class InteractionController extends Controller
 
     /* Who can delete the Interactions is the one who created it only */
 
-    public function delete(Request $request, Interaction $interaction)
+    public function delete(Interaction $interaction)
     {
         $interaction->delete();
         return response()->json(['status' => true, 'message' => 'interaction delete successfully'], 201);

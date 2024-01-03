@@ -15,11 +15,7 @@ class PostController extends Controller
     {
         if ($request['description'] || $request['files']) {
             $post = Post::create(['description' => $request->description, 'user_id' => auth()->user()->id]);
-            if ($request['files']) {
-                foreach ($request['files'] as $file) {
-                    $post->addMedia($file)->toMediaCollection('postsFiles');
-                }
-            }
+            uploadFiles($request['files'], $post,'postsFiles');
             return response()->json(['status' => true, 'message' => 'Post  created Successfully', 'Post' => new PostResource($post)], 201);
         } else {
             return response()->json(['status' => false, 'message' => 'post  required'], 400);
@@ -33,12 +29,7 @@ class PostController extends Controller
         if ($request->description) {
             $post->update(['description' => $request->description]);
         }
-        if ($request['files']) {
-            $post->media()->delete();
-            foreach ($request['files'] as $file) {
-                $post->addMedia($file)->toMediaCollection('postsFiles');
-            }
-        }
+        updateFiles($request['files'], $post,'postsFiles');
         return response()->json(['status' => true, 'message' => 'Post  Update Successfully', 'Post' => new PostResource($post)], 201);
     }
 

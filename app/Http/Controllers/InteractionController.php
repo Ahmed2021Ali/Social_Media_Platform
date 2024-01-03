@@ -37,8 +37,7 @@ class InteractionController extends Controller
 
     public function show(Post $post)
     {
-        return response()->json(['status' => true,
-            'post' => new PostResource($post),
+        return response()->json(['status' => true, 'post' => new PostResource($post),
             'interactions' => InteractionResource::collection($post->interactions)], 200);
     }
 

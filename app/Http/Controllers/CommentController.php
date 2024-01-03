@@ -17,12 +17,8 @@ class CommentController extends Controller
     {
         if (isset($request['title']) || isset($request['files'])) {
             $comment = Comment::create(['title' => $request->title, 'user_id' => auth()->user()->id, 'post_id' => $post->id]);
-            if ($request['files']) {
-                foreach ($request['files'] as $file) {
-                    $comment->addMedia($file)->toMediaCollection('chatFiles');
-                }
-            }
-            return response()->json(['status' => true, 'message' => ' Comment  created Successfully', 'Comment' => new CommentResource($comment)], 201);
+            uploadFiles($request['files'], $comment, 'commentFiles');
+            return response()->json(['status' => true, 'message' => ' Comment created Successfully', 'Comment' => new CommentResource($comment)], 201);
         } else {
             return response()->json(['status' => false, 'message' => 'Comment required'], 402);
         }
@@ -35,18 +31,13 @@ class CommentController extends Controller
         if ($request->title) {
             $comment->update(['title' => $request->title]);
         }
-        if ($request['files']) {
-            $comment->media()->delete();
-            foreach ($request['files'] as $file) {
-                $comment->addMedia($file)->toMediaCollection('commentFiles');
-            }
-        }
+        updateFiles($request['files'], $comment, 'commentFiles');
         return response()->json(['status' => true, 'message' => ' Comment  Update Successfully', 'Comment' => new CommentResource($comment)], 201);
     }
 
     /* Who can delete the comment is the one who created it only */
 
-    public function delete(Request $request, Comment $comment)
+    public function delete(Comment $comment)
     {
         $comment->delete();
         return response()->json(['status' => true, 'message' => 'comment delete successfully'], 201);

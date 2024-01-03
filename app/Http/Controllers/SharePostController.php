@@ -13,12 +13,8 @@ class SharePostController extends Controller
 
     public function create(Request $request, Post $post)
     {
-        $request->validate(['title' => 'required|max:255',]);
-        $postShared = SharePost::create([
-            'title' => $request->title,
-            'post_id' => $post->id,
-            'share_by' => auth()->user()->id
-        ]);
+        $request->validate(['title' => 'required|max:255']);
+        $postShared = SharePost::create(['title' => $request->title, 'post_id' => $post->id, 'share_by' => auth()->user()->id]);
         return response()->json(['status' => true,
             'message' => 'Post  Shared Successfully',
             'share' => new SharePostResource($postShared)], 201);
@@ -30,16 +26,13 @@ class SharePostController extends Controller
         if ($request->title) {
             $sharePost->update(['title' => $request->title]);
         }
-        return response()->json(['status' => true,
-            'message' => 'Post  Shared  has Updated Successfully',
+        return response()->json(['status' => true,'message' => 'Post  Shared  has Updated Successfully',
             'share' => new SharePostResource($sharePost)], 201);
     }
 
     public function delete(SharePost $sharePost)
     {
         $sharePost->delete();
-        return response()->json(['status' => true,
-            'message' => ' share of post deleted successfully',
-            'share By' => new UserhResource(auth()->user())], 201);
+        return response()->json(['status' => true, 'message' => ' share of post deleted successfully'], 201);
     }
 }

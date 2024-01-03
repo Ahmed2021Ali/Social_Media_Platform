@@ -25,11 +25,7 @@ class ChatController extends Controller
             $message = Message::create(['sender_id' => auth()->user()->id, 'receiver_id' => $user->id,
                 'content' => $request->message, 'chat_id' => $collection === false ? $chat->id : $collection[0]->chat_id
             ]);
-            if ($request['files']) {
-                foreach ($request['files'] as $file) {
-                    $message->addMedia($file)->toMediaCollection('chatFiles');
-                }
-            }
+            uploadFiles($request['files'], $message,'chatFiles');
             broadcast(new MessageSent($message->toArray(), $message->receiver_id))->toOthers();
             return response()->json(['message' => 'Message  created Successfully', 'messages' => new ChatResource($message)], 201);;
         } else {

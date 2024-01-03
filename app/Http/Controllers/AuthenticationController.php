@@ -20,9 +20,9 @@ class AuthenticationController extends Controller
     public function register(StoreUserRequest $request)
     {
         $user = User::create(Arr::except($request->validated(), 'file'));
-        if ($request->file) {
-            $user->addMediaFromRequest('file')->toMediaCollection('usersImages');
-        }
+
+        uploadFiles($request['file'], $user,'usersImages');
+
         return response()->json(['status' => true, 'message' => 'User Created Successfully',
             'token' => $user->createToken("User Token")->plainTextToken,
             'user' => new UserhResource($user),

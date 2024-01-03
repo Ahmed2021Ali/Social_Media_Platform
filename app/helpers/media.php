@@ -21,6 +21,16 @@ function uploadFiles($files, $model, $folder)
     }
 }
 
+function updateFiles($files, $model, $folder)
+{
+    if ($files) {
+        $model->media()->delete();
+        foreach ($files as $file) {
+            $model->addMedia($file)->toMediaCollection($folder);
+        }
+    }
+}
+
 function IsTherePreviousChat($OtherUserId, $user_id)
 {
     $collection = Message::whereHas('chat', function ($q) use ($OtherUserId, $user_id) {
